@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Heading from "./Components/Heading";
+import Body from "./Components/Body";
+import { Provider } from "react-redux";
+import appStore from "./Redux/appStore";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import WatchPage from "./Components/WatchPage";
+import MainContainer from "./Components/MainContainer";
 
 function App() {
+  const routingInfo = createBrowserRouter([
+    {
+      path: "/",
+      element: <Body></Body>,
+      // child elements will render in <outlet> component , and this outlet should be in body component (the element which its child have!)
+      children: [
+        {
+          path: "/",
+          element: <MainContainer></MainContainer>,
+        },
+        {
+          path: "/watch",
+          element: <WatchPage></WatchPage>,
+        },
+      ],
+    },
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={appStore}>
+      <div className="App ">
+        <Heading></Heading>
+        <RouterProvider router={routingInfo}></RouterProvider>
+      </div>
+    </Provider>
   );
 }
 
