@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# FreeFlow - Video Streaming WebApp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+FreeFlow is a dynamic and user-friendly video streaming platform designed to provide seamless video playback and an ad-free viewing experience. With a sleek UI and powerful features, FreeFlow is an ideal solution for exploring and enjoying videos online.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Ad-Free Streaming**: Enjoy videos without interruptions.
+- **Search Functionality**: Quickly find videos with our optimized search feature.
+- **Video Recommendations**: Smart suggestions to explore new content.
+- **Responsive Design**: Accessible across desktops, tablets, and mobile devices.
+- **User Comments**: you can view comments on different videos.
 
-### `npm start`
+## ⏳ Features comming soon
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Dark Mode Support**: Eye-friendly viewing in low-light environments.
+- **Playlists** : Organize and save your favorite videos.
+- **Users can comment on videos**: Engage in discussions with a clean and interactive comments section.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+- **Frontend**: React.js, Tailwind CSS
+- **State Management**: Redux
+- **API**: YouTube Data API
+- **Routing**: React Router DOM
+- **Backend** : Node.js/Express.js
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 💻 Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the Repository 
+```
+git clone https://github.com/your-username/freeflow.git
+cd freeflow
+```
 
-### `npm run eject`
+2. Install dependencies:
+```
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Set up API Key:
+- Obtain an API key from Google Cloud Console.
+- Replace the placeholder in YOUTUBE_COMMENTS_API or other constants with your API key.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. Run the development server:
+```
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5. Open the app:
+- Visit http://localhost:3000 in your browser.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🐛 Report Issues
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+If you find any bugs or have suggestions for enhancements, feel free to open an issue.
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📜 License
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+FreeFlow is licensed under the MIT License. See LICENSE for more details.
