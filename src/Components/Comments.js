@@ -1,11 +1,8 @@
 import React from "react";
 
 const Comments = ({ item }) => {
-  const {
-    authorProfileImageUrl,
-    authorDisplayName,
-    textOriginal,
-  } = item?.snippet?.topLevelComment?.snippet || {};
+  const { authorProfileImageUrl, authorDisplayName, textOriginal } =
+    item?.snippet?.topLevelComment?.snippet || {};
 
   // Safely access the comments array with fallback to empty array
   const comments = item?.replies?.comments || [];
@@ -16,7 +13,11 @@ const Comments = ({ item }) => {
       <div className="flex items-center">
         <img
           className="rounded-full h-10 p-1 m-1"
-          src={authorProfileImageUrl}
+          src={
+            authorProfileImageUrl
+              ? authorProfileImageUrl
+              : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRs_rWILOMx5-v3aXwJu7LWUhnPceiKvvDg&s"
+          }
           alt={authorDisplayName}
         />
         <h1>{authorDisplayName}</h1>
@@ -36,11 +37,18 @@ const Comments = ({ item }) => {
         } = oneComment?.snippet || {};
 
         return (
-          <div key={replyAuthorDisplayName} className="pl-10 my-4 border border-l-black">
+          <div
+            key={replyAuthorDisplayName}
+            className="pl-10 my-4 border border-l-black"
+          >
             <div className="flex items-center">
               <img
                 className="rounded-full h-10 p-1 m-1"
-                src={replyAuthorProfileImageUrl}
+                src={
+                  replyAuthorProfileImageUrl
+                    ? replyAuthorProfileImageUrl
+                    : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRs_rWILOMx5-v3aXwJu7LWUhnPceiKvvDg&s"
+                }
                 alt={replyAuthorDisplayName}
               />
               <h1>{replyAuthorDisplayName}</h1>
