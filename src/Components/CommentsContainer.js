@@ -30,7 +30,7 @@ const CommentsContainer = () => {
       <h1 className="text-4xl font-semibold">Comments </h1>
       <div>
         {TOPcomments.map((item) => {
-          return <Comments item={item}></Comments>;
+          return <Comments key={item.snippet?.topLevelComment?.id} item={item}></Comments>;
         })}
       </div>
     </div>
