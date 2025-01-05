@@ -6,6 +6,8 @@ import appStore from "./Redux/appStore";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import WatchPage from "./Components/WatchPage";
 import MainContainer from "./Components/MainContainer";
+import Login from "./Components/Login";
+import SignUpForm from "./Components/SignUpForm";
 
 function App() {
   const routingInfo = createBrowserRouter([
@@ -26,10 +28,25 @@ function App() {
     },
   ]);
 
+  const headingRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Heading></Heading>,
+    },
+    {
+      path: "/login",
+      element: <Login></Login>,
+    },
+    {
+      path: "/signup",
+      element: <SignUpForm></SignUpForm>,
+    },
+  ]);
+
   return (
     <Provider store={appStore}>
       <div className="App ">
-        <Heading></Heading>
+        <RouterProvider router={headingRouter}></RouterProvider>
         <RouterProvider router={routingInfo}></RouterProvider>
       </div>
     </Provider>

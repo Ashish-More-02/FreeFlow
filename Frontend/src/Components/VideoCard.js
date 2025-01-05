@@ -58,33 +58,28 @@ const VideoCard = ({ info }) => {
   const handleClickVideo = () => {};
 
   return (
-    <div
-      className="h-full p-3 rounded-xl shadow-xl cursor-pointer bg-gray-100 "
-      onClick={handleClickVideo}
-    >
-      {thumbnails.medium && (
-        <img
-          className="rounded-2xl"
-          src={thumbnails.medium.url}
-          alt="thumbnail"
-        />
-      )}
-      <div>
-        <div className="flex mt-2">
-          <img
-            className="h-8 mr-1"
-            alt="channel logo"
+    <div className="w-full h-full">
+      <img 
+        className="rounded-lg w-full object-cover"
+        alt="thumbnail" 
+        src={thumbnails?.medium?.url}
+      />
+      <div className="flex mt-2">
+        <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+          <img 
+            className="w-full h-full object-cover"
+            alt="channel-icon" 
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRs_rWILOMx5-v3aXwJu7LWUhnPceiKvvDg&s"
-          ></img>
-          <h1 className="font-semibold h-12 overflow-hidden">
-            {title + "..." || "No Title"}
-          </h1>
+          />
         </div>
-        <h2 className="pl-8">{channelTitle || "No Channel Title"}</h2>
-        <div className="flex overflow-hidden pl-2 justify-evenly ">
-          <p>{OrigianlViews + " Views" || "No Views"}</p>
-          <p>·</p>
-          <p>{dateUploaded || "No Date"}</p>
+        <div className="ml-2 flex-grow">
+          <h3 className="text-sm font-semibold line-clamp-2">{title}</h3>
+          <p className="text-xs text-gray-600 mt-1">{channelTitle}</p>
+          <div className="text-xs text-gray-600">
+            <span>{OrigianlViews} views</span>
+            <span className="mx-1">•</span>
+            <span>{dateUploaded}</span>
+          </div>
         </div>
       </div>
     </div>
