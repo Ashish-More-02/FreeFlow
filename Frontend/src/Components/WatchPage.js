@@ -29,7 +29,9 @@ const WatchPage = () => {
           referrerpolicy="strict-origin-when-cross-origin"
           allowFullScreen
         ></iframe>
-        <LiveChat ></LiveChat>
+        <div className="w-[34%] pr-5 hidden md:block">
+          <LiveChat></LiveChat>
+        </div>
       </div>
 
       <CommentsContainer></CommentsContainer>

@@ -24,7 +24,7 @@ const LiveChat = () => {
     };
   }, []);
   return (
-    <div className="h-[480px] border border-black rounded-lg w-[30%] mx-auto ml-4 mr-4 ">
+    <div className="h-[480px] border border-black rounded-lg w-full mx-auto ml-4 mr-4 ">
         <h1 className="font-semibold text-xl p-2 text-cyan-950">🔴 Live Chat</h1>
       <div className="flex flex-col-reverse overflow-y-scroll h-[90%] w-full p-2">
         {chatMessages.map((chat) => {

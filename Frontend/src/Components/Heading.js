@@ -45,12 +45,12 @@ const Heading = () => {
   };
 
   return (
-    <div className="shadow-lg p-3 my-2 rounded-md w-full">
+    <div className="shadow-lg p-3 my-2 rounded-md w-full bg-gray-200">
       <div className="grid grid-cols-12 items-center gap-3">
         <div className="col-span-3 md:col-span-3 lg:col-span-2 flex items-center gap-3">
           <img
             onClick={handleToggleMenu}
-            className="h-6 w-6 md:h-7 md:w-7 cursor-pointer hover:bg-gray-100 p-1 rounded-full"
+            className="h-6 w-6 md:h-7 md:w-7 cursor-pointer hover:bg-gray-100 p-1 rounded-full "
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png"
             alt="menu"
           />

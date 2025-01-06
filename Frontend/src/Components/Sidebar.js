@@ -5,9 +5,9 @@ const Sidebar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <>
+    <div className="pl-2 bg-gray-50">
       {/* Hamburger menu button - visible only on mobile */}
-      <button 
+      <button
         className="lg:hidden fixed top-4 left-4 z-50 p-2"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
@@ -17,12 +17,14 @@ const Sidebar = () => {
       </button>
 
       {/* Sidebar content */}
-      <div className={`
+      <div
+        className={`
         fixed lg:static top-0 left-0 h-full bg-white
-        ${isMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        ${isMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         transition-transform duration-300 ease-in-out
         lg:w-[12%] w-64 p-2 shadow-lg z-40
-      `}>
+      `}
+      >
         <ul>
           <li>
             <Link to={"/"}>Home</Link>
@@ -42,7 +44,7 @@ const Sidebar = () => {
         </ul>
 
         <h1 className="font-bold text-lg mt-3">Subscribtions</h1>
-        <ul>
+        <ul className="flex flex-col w-full">
           <li>Harkarit singh</li>
           <li>code with harry</li>
           <li>TechBar</li>
@@ -66,12 +68,12 @@ const Sidebar = () => {
 
       {/* Overlay for mobile */}
       {isMenuOpen && (
-        <div 
+        <div
           className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
           onClick={() => setIsMenuOpen(false)}
         ></div>
       )}
-    </>
+    </div>
   );
 };
 

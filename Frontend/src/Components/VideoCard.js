@@ -58,7 +58,7 @@ const VideoCard = ({ info }) => {
   const handleClickVideo = () => {};
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full bg-gray-200 p-4 rounded-xl">
       <img 
         className="rounded-lg w-full object-cover"
         alt="thumbnail" 

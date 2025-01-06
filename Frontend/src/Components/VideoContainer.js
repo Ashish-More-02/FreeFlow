@@ -23,7 +23,7 @@ const VideoContainer = () => {
         return (
           <Link 
             key={video.id} 
-            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 cursor-pointer p-2 mx-0 sm:mx-2 my-2 h-auto" 
+            className="w-full sm:w-1/2 md:w-1/3 lg:w-[30%] cursor-pointer p-2 mx-0 sm:mx-2 my-2 h-auto" 
             to={"/watch?v=" + video.id}
           >
             <VideoCard info={video}></VideoCard>

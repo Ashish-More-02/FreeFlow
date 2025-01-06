@@ -26,8 +26,12 @@ const CommentsContainer = () => {
     // console.log(jsonData.items)
   };
   return (
-    <div className="my-4">
+    <div className="my-4 bg-gray-200 p-4 w-full md:max-w-[66%]">
       <h1 className="text-4xl font-semibold">Comments </h1>
+      <form className="flex items-center">
+        <input type="text" placeholder="add comment" className="w-full p-2 border border-gray-300 rounded-md" />
+        <button type="submit" className="bg-blue-500 text-white p-2 rounded-md px-2 w-[10%] mx-4">Add</button>
+      </form>
       <div>
         {TOPcomments.map((item) => {
           return <Comments key={item.snippet?.topLevelComment?.id} item={item}></Comments>;
