@@ -3,15 +3,14 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const User = require("./models/User");
+require('dotenv').config();
 
-mongoose.connect(
-  "mongodb+srv://ashishmore2125:SimpleShop123@cluster0.avs2z.mongodb.net/Freeflow"
-)
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.log("Error: " + err));
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
