@@ -31,6 +31,31 @@ const SignUpForm = () => {
     // Add your sign-up logic here
   };
 
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+  
+    try {
+      const response = await fetch("http://localhost:3000/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        alert("User registered successfully");
+      } else {
+        alert(data.error);
+      }
+    } catch (err) {
+      console.error("Sign-up error:", err);
+    }
+  };
+  
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 flex-col">
       <Link to="/">
@@ -41,7 +66,7 @@ const SignUpForm = () => {
       </Link>
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
         <h2 className="text-2xl font-bold text-center text-gray-800">Sign Up</h2>
-        <form className="space-y-4" onSubmit={handleSubmit}>
+        <form className="space-y-4" onSubmit={handleSignUp}>
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
               Full Name

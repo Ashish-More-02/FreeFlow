@@ -4,9 +4,12 @@ import { doToggleMenu } from "../Redux/Slices/appConfigSlice";
 import logoImg from "../Images/logo.png";
 import { YOUTUBE_SEARCH_API } from "../Utils/Constants";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { setUser } from "../Redux/Slices/UserSlice";
 
 const Heading = () => {
   const dispatch = useDispatch();
+  const {user,isAuthenticated} = useSelector((state)=>state.user);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -67,7 +70,7 @@ const Heading = () => {
           </Link>
         </div>
 
-        <div className="col-span-6 md:col-span-7 lg:col-span-9">
+        <div className="col-span-6 md:col-span-7 lg:col-span-8">
           <div className="relative max-w-2xl mx-auto">
             <input
               className="w-full bg-gray-100 rounded-full py-2 md:py-3 px-5 pr-14 text-base md:text-lg"
@@ -111,14 +114,19 @@ const Heading = () => {
           </div>
         </div>
 
-        <div className="col-span-3 md:col-span-2 lg:col-span-1 flex justify-end">
+        <div className="col-span-3 md:col-span-2 lg:col-span-2 flex justify-end">
           <Link to="/login" className="flex items-center gap-3">
             <img
               className="h-8 w-8 md:h-10 md:w-10 rounded-full"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRs_rWILOMx5-v3aXwJu7LWUhnPceiKvvDg&s"
               alt="User"
             />
-            <span className="hidden md:block text-lg lg:text-xl">Login</span>
+            {isAuthenticated ? (
+              <span className="hidden md:block text-lg whitespace-nowrap ">{user.name}</span>
+            ) : (
+              <span className="hidden md:block text-lg lg:text-xl">Login</span>
+            )}
+            {/* <span className="hidden md:block text-lg lg:text-xl">Login</span> */}
           </Link>
         </div>
       </div>
