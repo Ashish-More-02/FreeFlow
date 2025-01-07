@@ -10,44 +10,40 @@ import Login from "./Components/Login";
 import SignUpForm from "./Components/SignUpForm";
 
 function App() {
-  const routingInfo = createBrowserRouter([
+  const appRouter = createBrowserRouter([
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/signup",
+      element: <SignUpForm />,
+    },
     {
       path: "/",
-      element: <Body></Body>,
-      // child elements will render in <outlet> component , and this outlet should be in body component (the element which its child have!)
+      element: (
+        <>
+          <Heading />
+          <Body />
+        </>
+      ),
       children: [
         {
           path: "/",
-          element: <MainContainer></MainContainer>,
+          element: <MainContainer />,
         },
         {
           path: "/watch",
-          element: <WatchPage></WatchPage>,
+          element: <WatchPage />,
         },
       ],
     },
   ]);
 
-  const headingRouter = createBrowserRouter([
-    {
-      path: "/",
-      element: <Heading></Heading>,
-    },
-    {
-      path: "/login",
-      element: <Login></Login>,
-    },
-    {
-      path: "/signup",
-      element: <SignUpForm></SignUpForm>,
-    },
-  ]);
-
   return (
     <Provider store={appStore}>
-      <div className="App ">
-        <RouterProvider router={headingRouter}></RouterProvider>
-        <RouterProvider router={routingInfo}></RouterProvider>
+      <div className="App">
+        <RouterProvider router={appRouter} />
       </div>
     </Provider>
   );

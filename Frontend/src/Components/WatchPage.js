@@ -12,6 +12,7 @@ const WatchPage = () => {
   console.log(searchParams.get("v"));
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(closeMenu());
   }, []);
 
