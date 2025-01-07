@@ -69,7 +69,7 @@ const Heading = ({isMenuOpen, setIsMenuOpen}) => {
         </div>
 
         <div className="col-span-6 md:col-span-7 lg:col-span-8">
-          <div className="relative max-w-2xl mx-auto">
+          <div className="relative sm:max-w-2xl mx-auto">
             <input
               className="w-full bg-gray-100 rounded-full py-2 md:py-3 px-5 pr-14 text-base md:text-lg"
               type="text"
@@ -94,7 +94,7 @@ const Heading = ({isMenuOpen, setIsMenuOpen}) => {
             </div>
             
             {showSuggestions && searchQuery && (
-              <div className="absolute mt-1 w-full bg-white rounded-lg shadow-lg z-50">
+              <div className="absolute mt-1 w-[200%] mx-auto left-[-85px] bg-white rounded-lg shadow-lg z-50 ">
                 <ul className="py-2">
                   {suggestions.map((s) => (
                     <li
