@@ -8,8 +8,10 @@ import WatchPage from "./Components/WatchPage";
 import MainContainer from "./Components/MainContainer";
 import Login from "./Components/Login";
 import SignUpForm from "./Components/SignUpForm";
+import { useState } from "react";
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const appRouter = createBrowserRouter([
     {
       path: "/login",
@@ -23,8 +25,8 @@ function App() {
       path: "/",
       element: (
         <>
-          <Heading />
-          <Body />
+          <Heading isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+          <Body isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         </>
       ),
       children: [

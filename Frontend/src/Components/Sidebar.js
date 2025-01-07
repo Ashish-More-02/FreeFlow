@@ -1,78 +1,56 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { doToggleMenu } from "../Redux/Slices/appConfigSlice";
 
 const Sidebar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMenuOpen = useSelector((store) => store.toggleMenu);
+  const dispatch = useDispatch();
 
   return (
-    <div className="pl-2 bg-gray-50">
-      {/* Hamburger menu button - visible only on mobile */}
-      <button
-        className="lg:hidden fixed top-4 left-4 z-50 p-2"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-      >
-        <div className="w-6 h-0.5 bg-black mb-1"></div>
-        <div className="w-6 h-0.5 bg-black mb-1"></div>
-        <div className="w-6 h-0.5 bg-black"></div>
-      </button>
-
+    <div className="relative z-10 bg-white">
       {/* Sidebar content */}
-      <div
-        className={`
-        fixed lg:static top-0 left-0 h-full bg-white
-        ${isMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
-        transition-transform duration-300 ease-in-out
-        lg:w-[12%] w-64 p-2 shadow-lg z-40
-      `}
-      >
+      <div className="px-4 fixed left-0 top-16 h-full bg-[rgb(255,255,255)] sm:static">
         <ul>
-          <li>
+          <li className="font-semibold">
             <Link to={"/"}>Home</Link>
           </li>
-          <li>Shorts</li>
-          <li>Subscribtions</li>
+          <li className="font-semibold">Shorts</li>
+          <li className="font-semibold">Subscriptions</li>
         </ul>
 
-        <h1 className="font-bold text-lg mt-3">You </h1>
+        <h1 className="font-bold text-lg mt-3">You</h1>
         <ul>
-          <li>History</li>
-          <li>Playlists</li>
-          <li>Your Movies</li>
-          <li>Your Videos</li>
-          <li>Watch Later</li>
-          <li>Live Movies</li>
+          <li className="m-1 font-semibold">History</li>
+          <li className="m-1 font-semibold">Playlists</li>
+          <li className="m-1 font-semibold">Your Movies</li>
+          <li className="m-1 font-semibold">Your Videos</li>
+          <li className="m-1 font-semibold">Watch Later</li>
+          <li className="m-1 font-semibold">Live Movies</li>
         </ul>
 
-        <h1 className="font-bold text-lg mt-3">Subscribtions</h1>
+        <h1 className="font-bold text-lg mt-3">Subscriptions</h1>
         <ul className="flex flex-col w-full">
-          <li>Harkarit singh</li>
-          <li>code with harry</li>
-          <li>TechBar</li>
-          <li>minecraft</li>
-          <li>akashay sani</li>
-          <li>coding live</li>
+          <li className="m-1 font-semibold">Harsharit Singh</li>
+          <li className="m-1 font-semibold">Code with Harry</li>
+          <li className="m-1 font-semibold">TechBar</li>
+          <li className="m-1 font-semibold">Minecraft</li>
+          <li className="m-1 font-semibold">Akshay Saini</li>
+          <li className="m-1 font-semibold">Coding Live</li>
         </ul>
 
         <h1 className="font-bold text-lg mt-3">Explore</h1>
         <ul>
-          <li>Trending</li>
-          <li>Shopping</li>
-          <li>Music</li>
-          <li>Movies</li>
-          <li>live</li>
-          <li>gamming</li>
-          <li>News</li>
-          <li>Podcasts</li>
+          <li className="m-1 font-semibold">Trending</li>
+          <li className="m-1 font-semibold">Shopping</li>
+          <li className="m-1 font-semibold">Music</li>
+          <li className="m-1 font-semibold">Movies</li>
+          <li className="m-1 font-semibold">Live</li>
+          <li className="m-1 font-semibold">Gaming</li>
+          <li className="m-1 font-semibold">News</li>
+          <li className="m-1 font-semibold">Podcasts</li>
         </ul>
       </div>
-
-      {/* Overlay for mobile */}
-      {isMenuOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
-          onClick={() => setIsMenuOpen(false)}
-        ></div>
-      )}
     </div>
   );
 };

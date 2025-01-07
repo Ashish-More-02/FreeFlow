@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { setUser } from "../Redux/Slices/UserSlice";
 
-const Heading = () => {
+const Heading = ({isMenuOpen, setIsMenuOpen}) => {
   const dispatch = useDispatch();
   const {user,isAuthenticated} = useSelector((state)=>state.user);
   const [searchQuery, setSearchQuery] = useState("");
@@ -45,7 +45,7 @@ const Heading = () => {
   };
 
   return (
-    <div className="shadow-lg p-3 my-2 rounded-md w-full bg-gray-200">
+    <div className="shadow-lg p-3 my-2 rounded-md w-full bg-gray-200 sticky z-10 top-0 sm:static sm:z-0">
       <div className="grid grid-cols-12 items-center gap-3">
         <div className="col-span-3 md:col-span-3 lg:col-span-2 flex items-center gap-3">
           <img
@@ -56,14 +56,12 @@ const Heading = () => {
           />
           <Link to="/" className="flex items-center">
             <img 
-              className="h-7 md:h-9 lg:h-10 cursor-pointer" 
+              className="h-8 md:h-9 lg:h-10 cursor-pointer" 
               src={logoImg} 
               alt="logo"
-              onClick={() => window.location.href = '/'}
             />
             <h1 
               className="hidden md:block text-2xl lg:text-3xl font-bold ml-2 cursor-pointer"
-              onClick={() => window.location.href = '/'}
             >
               FreeFlow
             </h1>
