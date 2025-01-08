@@ -94,7 +94,7 @@ const Heading = ({isMenuOpen, setIsMenuOpen}) => {
             </div>
             
             {showSuggestions && searchQuery && (
-              <div className="absolute mt-1 w-[200%] mx-auto left-[-85px] bg-white rounded-lg shadow-lg z-50 ">
+              <div className="absolute mt-1 w-[200%] mx-auto left-[-85px] sm:w-full sm:left-0 bg-white rounded-lg shadow-lg z-50 ">
                 <ul className="py-2">
                   {suggestions.map((s) => (
                     <li
