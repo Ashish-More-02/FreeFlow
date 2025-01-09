@@ -1,21 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { doToggleMenu } from "../Redux/Slices/appConfigSlice";
+import {
+  closeMenu,
+  doToggleMenu,
+  openMenu,
+} from "../Redux/Slices/appConfigSlice";
 import logoImg from "../Images/logo.png";
 import { YOUTUBE_SEARCH_API } from "../Utils/Constants";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { setUser } from "../Redux/Slices/UserSlice";
+import useScreenSize from "../Utils/useScreenSize";
+import { getSearchVideoResults } from "../Redux/Slices/SearchSlice";
 
-const Heading = ({isMenuOpen, setIsMenuOpen}) => {
+const Heading = ({ isMenuOpen, setIsMenuOpen }) => {
   const dispatch = useDispatch();
-  const {user,isAuthenticated} = useSelector((state)=>state.user);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const screenSize = useScreenSize();
 
   const handleToggleMenu = () => {
     dispatch(doToggleMenu());
+  };
+
+  const handleOpenMenu = () => {
+    dispatch(openMenu());
+  };
+
+  const handleCloseMenu = () => {
+    dispatch(closeMenu());
   };
 
   useEffect(() => {
@@ -39,9 +54,16 @@ const Heading = ({isMenuOpen, setIsMenuOpen}) => {
       const jsonData = await data.json();
       setSuggestions(jsonData[1]);
     } catch (error) {
-      console.error('Error fetching search suggestions:', error);
+      console.error("Error fetching search suggestions:", error);
       setSuggestions([]);
     }
+  };
+
+  const showResultVideos = () => {
+    dispatch(
+      getSearchVideoResults(searchQuery)
+    );
+
   };
 
   return (
@@ -54,18 +76,33 @@ const Heading = ({isMenuOpen, setIsMenuOpen}) => {
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png"
             alt="menu"
           />
-          <Link to="/" className="flex items-center">
-            <img 
-              className="h-8 md:h-9 lg:h-10 cursor-pointer" 
-              src={logoImg} 
-              alt="logo"
-            />
-            <h1 
-              className="hidden md:block text-2xl lg:text-3xl font-bold ml-2 cursor-pointer"
+          {screenSize.width < 640 ? (
+            <Link
+              to="/"
+              className="flex items-center"
+              onClick={handleCloseMenu}
             >
-              FreeFlow
-            </h1>
-          </Link>
+              <img
+                className="h-8 md:h-9 lg:h-10 cursor-pointer"
+                src={logoImg}
+                alt="logo"
+              />
+              <h1 className="hidden md:block text-2xl lg:text-3xl font-bold ml-2 cursor-pointer">
+                FreeFlow
+              </h1>
+            </Link>
+          ) : (
+            <Link to="/" className="flex items-center" onClick={handleOpenMenu}>
+              <img
+                className="h-8 md:h-9 lg:h-10 cursor-pointer"
+                src={logoImg}
+                alt="logo"
+              />
+              <h1 className="hidden md:block text-2xl lg:text-3xl font-bold ml-2 cursor-pointer">
+                FreeFlow
+              </h1>
+            </Link>
+          )}
         </div>
 
         <div className="col-span-6 md:col-span-7 lg:col-span-8">
@@ -88,11 +125,17 @@ const Heading = ({isMenuOpen, setIsMenuOpen}) => {
                   <span className="text-base md:text-lg text-gray-500">✕</span>
                 </button>
               )}
-              <button className="p-2 md:p-3 hover:bg-gray-200 rounded-full mr-1">
+              <Link to={"/results"}>
+              <button
+                className="p-2 md:p-3 hover:bg-gray-200 rounded-full mr-1"
+                onClick={showResultVideos}
+              >
                 <span className="text-base md:text-lg">🔍</span>
               </button>
+              </Link>
+              
             </div>
-            
+
             {showSuggestions && searchQuery && (
               <div className="absolute mt-1 w-[200%] mx-auto left-[-85px] sm:w-full sm:left-0 bg-white rounded-lg shadow-lg z-50 ">
                 <ul className="py-2">
@@ -102,7 +145,9 @@ const Heading = ({isMenuOpen, setIsMenuOpen}) => {
                       className="px-5 py-2.5 hover:bg-gray-100 cursor-pointer text-base md:text-lg flex items-center gap-3"
                       onClick={() => setSearchQuery(s)}
                     >
-                      <span className="text-gray-400 text-lg md:text-xl">🔍</span>
+                      <span className="text-gray-400 text-lg md:text-xl">
+                        🔍
+                      </span>
                       <span>{s}</span>
                     </li>
                   ))}
@@ -120,7 +165,9 @@ const Heading = ({isMenuOpen, setIsMenuOpen}) => {
               alt="User"
             />
             {isAuthenticated ? (
-              <span className="hidden md:block text-lg whitespace-nowrap ">{user.name}</span>
+              <span className="hidden md:block text-lg whitespace-nowrap ">
+                {user.name}
+              </span>
             ) : (
               <span className="hidden md:block text-lg lg:text-xl">Login</span>
             )}

@@ -21,12 +21,13 @@ const WatchPage = () => {
       <div className="flex w-full justify-evenly ">
         <iframe
           className="rounded-2xl mx-auto w-full aspect-video max-w-[900px]"
-          src={"https://www.youtube.com/embed/" + searchParams.get("v")}
+          src={"https://www.youtube.com/embed/" + searchParams.get("v")+"?autoplay=1"}
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
           allowFullScreen
+          muted
         ></iframe>
         <div className="w-[34%] pr-5 hidden md:block">
           <LiveChat></LiveChat>

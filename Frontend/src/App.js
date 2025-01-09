@@ -9,6 +9,7 @@ import MainContainer from "./Components/MainContainer";
 import Login from "./Components/Login";
 import SignUpForm from "./Components/SignUpForm";
 import { useState } from "react";
+import SearchResults from "./Components/SearchResults";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,6 +38,10 @@ function App() {
         {
           path: "/watch",
           element: <WatchPage />,
+        },
+        {
+          path: "/results",
+          element: <SearchResults />,
         },
       ],
     },

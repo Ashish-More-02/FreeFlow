@@ -11,11 +11,14 @@ const appConfigSlice = createSlice({
         },
         closeMenu :(state)=>{
             state.toggleMenu = false;
+        },
+        openMenu :(state)=>{
+            state.toggleMenu = true;
         }
     }
 });
 
 
-export const {doToggleMenu,closeMenu} = appConfigSlice.actions;
+export const {doToggleMenu,closeMenu,openMenu} = appConfigSlice.actions;
 
 export default appConfigSlice.reducer;

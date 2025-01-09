@@ -51,9 +51,9 @@ const VideoCard = ({ info }) => {
     }
   }
 
-  const OrigianlViews = formatViews(statistics.viewCount);
+  const OrigianlViews = formatViews(statistics.viewCount) || "no views";
 
-  const dateUploaded = calculate_time_uploaded(publishedAt);
+  const dateUploaded = calculate_time_uploaded(publishedAt) || "no time";
 
   const handleClickVideo = () => {};
 
