@@ -57,18 +57,18 @@ const SignUpForm = () => {
   
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 flex-col">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 flex-col dark:bg-black dark:text-white">
       <Link to="/">
         <div className="flex justify-center items-center my-8">
           <img className="h-9 cursor-pointer m-2" alt="logo" src={logoImg}></img>
           <h1 className="text-4xl font-bold"> FreeFlow </h1>
         </div>
       </Link>
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-800">Sign Up</h2>
-        <form className="space-y-4" onSubmit={handleSignUp}>
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md dark:bg-[rgb(30,30,30)] dark:text-white">
+        <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-50">Sign Up</h2>
+        <form className="space-y-4 dark:text-white" onSubmit={handleSignUp}>
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-50">
               Full Name
             </label>
             <input
@@ -78,11 +78,11 @@ const SignUpForm = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
+              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="dark:text-gray-50 block text-sm font-medium text-gray-700">
               Email Address
             </label>
             <input
@@ -92,11 +92,11 @@ const SignUpForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
+              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className=" dark:text-gray-50 block text-sm font-medium text-gray-700">
               Password
             </label>
             <input
@@ -106,11 +106,11 @@ const SignUpForm = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
+              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
             />
           </div>
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="confirmPassword" className="dark:text-gray-50 block text-sm font-medium text-gray-700">
               Confirm Password
             </label>
             <input
@@ -120,7 +120,7 @@ const SignUpForm = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
+              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
             />
           </div>
           <button

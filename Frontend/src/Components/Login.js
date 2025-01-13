@@ -60,7 +60,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 flex-col">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 flex-col dark:bg-black dark:text-white">
       <Link to="/">
         <div className="flex justify-center items-center my-8">
           <img
@@ -71,16 +71,16 @@ const Login = () => {
           <h1 className="text-4xl font-bold"> FreeFlow </h1>
         </div>
       </Link>
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-800">Login</h2>
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md dark:bg-[rgb(30,30,30)] dark:text-white">
+        <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-50">Login</h2>
         {loginSuccess ? (
           <p className="text-center text-green-500">Login successful!</p>
         ) : (
-          <form className="space-y-4 bg-white" onSubmit={handleLogin}>
+          <form className="space-y-4 bg-white dark:bg-inherit dark:text-white" onSubmit={handleLogin}>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 bg-white
+                className="block text-sm font-medium text-gray-700 bg-white dark:bg-inherit dark:text-gray-50
             "
               >
                 Email Address
@@ -92,13 +92,13 @@ const Login = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
+                className="w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200 dark:bg-[rgb(60,60,60)] dark:border-black"
               />
             </div>
             <div className="bg-inherit">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 bg-white"
+                className="block text-sm font-medium text-gray-700 bg-white dark:bg-inherit dark:text-white"
               >
                 Password
               </label>
@@ -109,7 +109,7 @@ const Login = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
+                className="w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200 dark:bg-[rgb(60,60,60)] dark:border-black"
               />
             </div>
             <div className="flex items-center">

@@ -20,7 +20,7 @@ const VideoContainer = () => {
   };
 
   return (
-    <div className="flex flex-wrap mt-12 justify-evenly">
+    <div className="flex flex-wrap mt-12 justify-evenly  dark:bg-black dark:text-white">
       {videos
         ? videos.map((video) => {
             return (

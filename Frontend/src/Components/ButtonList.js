@@ -3,7 +3,7 @@ import Button from "./Button";
 
 const ButtonList = () => {
   return (
-      <div className="flex items-center w-full overflow-x-scroll no-scrollbar absolute">
+      <div className="flex items-center w-full overflow-x-scroll no-scrollbar absolute  dark:bg-black dark:text-white">
         <Button name={"All"} />
         <Button name={"gaming"} />
         <Button name={"Music"} />

@@ -13,6 +13,8 @@ import SearchResults from "./Components/SearchResults";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [darkmode, setDarkmode] = useState(false);
+
   const appRouter = createBrowserRouter([
     {
       path: "/login",
@@ -25,10 +27,10 @@ function App() {
     {
       path: "/",
       element: (
-        <>
-          <Heading isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+        <div className="dark:bg-black">
+          <Heading darkmode={darkmode} setDarkmode={setDarkmode} />
           <Body isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-        </>
+        </div>
       ),
       children: [
         {
@@ -49,7 +51,7 @@ function App() {
 
   return (
     <Provider store={appStore}>
-      <div className="App">
+      <div className={`App  ${darkmode ? " dark dark:bg-black" : ""}`}>
         <RouterProvider router={appRouter} />
       </div>
     </Provider>

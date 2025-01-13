@@ -8,18 +8,18 @@ const Sidebar = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="relative z-10 bg-white">
+    <div className="relative z-10 bg-white dark:text-white">
       {/* Sidebar content */}
-      <div className="px-4 fixed left-0 top-16 h-full bg-[rgb(255,255,255)] sm:static">
+      <div className="px-4 fixed left-0 top-16 h-full bg-[rgb(255,255,255)] dark:bg-[rgb(30,30,30)] sm:static">
         <ul>
-          <li className="font-semibold">
+          <li className="font-semibold dark:text-blue-400">
             <Link to={"/"}>Home</Link>
           </li>
           <li className="font-semibold">Shorts</li>
           <li className="font-semibold">Subscriptions</li>
         </ul>
 
-        <h1 className="font-bold text-lg mt-3">You</h1>
+        <h1 className="font-bold text-lg mt-3 dark:text-blue-400">You</h1>
         <ul>
           <li className="m-1 font-semibold">History</li>
           <li className="m-1 font-semibold">Playlists</li>
@@ -29,7 +29,7 @@ const Sidebar = () => {
           <li className="m-1 font-semibold">Live Movies</li>
         </ul>
 
-        <h1 className="font-bold text-lg mt-3">Subscriptions</h1>
+        <h1 className="font-bold text-lg mt-3 dark:text-blue-400">Subscriptions</h1>
         <ul className="flex flex-col w-full">
           <li className="m-1 font-semibold">Harsharit Singh</li>
           <li className="m-1 font-semibold">Code with Harry</li>
@@ -39,7 +39,7 @@ const Sidebar = () => {
           <li className="m-1 font-semibold">Coding Live</li>
         </ul>
 
-        <h1 className="font-bold text-lg mt-3">Explore</h1>
+        <h1 className="font-bold text-lg mt-3 dark:text-blue-400">Explore</h1>
         <ul>
           <li className="m-1 font-semibold">Trending</li>
           <li className="m-1 font-semibold">Shopping</li>

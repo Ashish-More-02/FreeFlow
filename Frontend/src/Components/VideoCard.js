@@ -58,7 +58,7 @@ const VideoCard = ({ info }) => {
   const handleClickVideo = () => {};
 
   return (
-    <div className="w-full h-full bg-gray-200 p-4 rounded-xl">
+    <div className="w-full h-full bg-gray-200 p-4 rounded-xl  dark:bg-[rgb(30,30,30)] dark:text-white">
       <img 
         className="rounded-lg w-full object-cover"
         alt="thumbnail" 
@@ -72,10 +72,10 @@ const VideoCard = ({ info }) => {
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRs_rWILOMx5-v3aXwJu7LWUhnPceiKvvDg&s"
           />
         </div>
-        <div className="ml-2 flex-grow">
-          <h3 className="text-sm font-semibold line-clamp-2">{title}</h3>
-          <p className="text-xs text-gray-600 mt-1">{channelTitle}</p>
-          <div className="text-xs text-gray-600">
+        <div className="ml-2 flex-grow ">
+          <h3 className="text-sm font-semibold line-clamp-2 dark:text-white">{title}</h3>
+          <p className="text-md text-gray-600 mt-1 dark:text-gray-300">{channelTitle}</p>
+          <div className="text-xs text-gray-600 dark:text-gray-400">
             <span>{OrigianlViews} views</span>
             <span className="mx-1">•</span>
             <span>{dateUploaded}</span>
