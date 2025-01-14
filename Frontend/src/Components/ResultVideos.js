@@ -89,10 +89,10 @@ const ResultVideos = ({ info }) => {
             <span className="mx-1">•</span>
             <span>{dateUploaded}</span>
           </div>
-          <p className="text-sm text-gray-600 mt-1 dark:text-gray-50">
+          <p className="text-sm text-gray-600 mt-1 dark:text-gray-50 font-semibold">
             {channelTitle+ " ☑️"}
           </p>
-          <div className="text-gray-400 text-sm hidden sm:block">
+          <div className="text-gray-800 text-sm hidden sm:block dark:text-gray-400">
             {description}
           </div>
         </div>
