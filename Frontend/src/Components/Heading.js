@@ -64,7 +64,7 @@ const Heading = ({ darkmode, setDarkmode }) => {
   };
 
   return (
-    <div className="shadow-lg p-3 my-2 rounded-md w-full bg-gray-200 sticky z-10 top-0 sm:static sm:z-0 dark:bg-[rgb(30,30,30)] dark:text-white dark:my-0">
+    <div className="shadow-lg p-3 my-0 rounded-md w-full bg-gray-200 sticky z-10 top-0 sm:static sm:z-0 dark:bg-[rgb(30,30,30)] dark:text-white dark:my-0">
       <div className="grid grid-cols-12 items-center gap-3">
         <div className="col-span-2 md:col-span-3 lg:col-span-2 flex items-center gap-3">
           {/* hamburger icon */}

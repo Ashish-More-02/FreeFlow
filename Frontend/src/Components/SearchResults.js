@@ -23,12 +23,13 @@ const SearchResults = () => {
 
   return (
     <div className="flex flex-wrap mt-12 justify-evenly">
+      <h1 className="w-[90%] sm:w-[88%] dark:text-white text-2xl mx-auto">Search Results</h1>
       {videos
         ? videos.map((video) => {
             return (
               <Link
                 key={video.id.videoId}
-                className="w-full sm:w-1/2 md:w-1/3 lg:w-[30%] cursor-pointer p-2 mx-0 sm:mx-2 my-2 h-auto"
+                className="w-full sm:w-full lg:w-[90%] cursor-pointer p-2 mx-0 sm:mx-2 my-2 h-auto"
                 to={"/watch?v=" + video.id.videoId}
               >
                 <ResultVideos info={video}></ResultVideos>

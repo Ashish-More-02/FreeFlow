@@ -12,7 +12,7 @@ FreeFlow is a dynamic and user-friendly video streaming platform designed to pro
 
 ## ⏳ Features comming soon
 
-- **Dark Mode Support**: Eye-friendly viewing in low-light environments.
+- ✅ **Dark Mode Support**: Eye-friendly viewing in low-light environments 
 - **Playlists** : Organize and save your favorite videos.
 - **Users can comment on videos**: Engage in discussions with a clean and interactive comments section.
 
