@@ -2,6 +2,8 @@
 
 FreeFlow is a dynamic and user-friendly video streaming platform designed to provide seamless video playback and an ad-free viewing experience. With a sleek UI and powerful features, FreeFlow is an ideal solution for exploring and enjoying videos online.
 
+[FreeFlow live link](https://free-flow-kappa.vercel.app/)
+
 ## 🚀 Features
 
 - **Ad-Free Streaming**: Enjoy videos without interruptions.
