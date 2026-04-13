@@ -17,12 +17,15 @@ const ResultVideos = ({ info }) => {
   } = snippet;
 
   function formatViews(views) {
-    if (views >= 1_000_000) {
-      return (views / 1_000_000).toFixed(1) + "M"; // Convert to millions
-    } else if (views >= 1_000) {
-      return (views / 1_000).toFixed(1) + "K"; // Convert to thousands
+    if (views == null) return "No";
+    const n = Number(views);
+    if (Number.isNaN(n)) return "No";
+    if (n >= 1_000_000) {
+      return (n / 1_000_000).toFixed(1) + "M";
+    } else if (n >= 1_000) {
+      return (n / 1_000).toFixed(1) + "K";
     } else {
-      return views.toString(); // Keep as is if less than 1,000
+      return n.toString();
     }
   }
 
