@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { YOUTUBE_COMMENTS_API } from "../Utils/Constants";
 import { useSearchParams } from "react-router-dom";
 import Comments from "./Comments";
+import { SOFT_GRADIENT } from "../Utils/theme";
 
 const CommentsContainer = () => {
   const [TOPcomments, setTOPComments] = useState([]);
@@ -47,11 +48,12 @@ const CommentsContainer = () => {
         <input
           type="text"
           placeholder="Add a comment…"
-          className="flex-grow bg-transparent border-b border-gray-300 focus:border-gray-800 dark:border-gray-600 dark:focus:border-gray-300 outline-none py-2 px-1 transition-colors"
+          className="flex-grow bg-transparent border-b border-gray-300 focus:border-[#8494FF] dark:border-gray-600 dark:focus:border-[#8494FF] outline-none py-2 px-1 transition-colors"
         />
         <button
           type="button"
-          className="px-5 py-2 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm"
+          style={{ backgroundImage: SOFT_GRADIENT }}
+          className="px-5 py-2 rounded-full text-[#141026] font-semibold text-sm shadow-md shadow-indigo-500/20 transition-transform hover:scale-[1.03]"
         >
           Comment
         </button>

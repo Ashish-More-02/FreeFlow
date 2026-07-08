@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import logoImg from "../Images/logo.png";
+import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../Utils/Constants";
+import AuthLayout, { Field, SubmitButton } from "./AuthLayout";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -32,14 +32,14 @@ const SignUpForm = () => {
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-  
+
     try {
       const response = await fetch(`${BACKEND_URL}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
       });
-  
+
       const data = await response.json();
       if (response.ok) {
         alert("User registered successfully. Please log in.");
@@ -51,90 +51,60 @@ const SignUpForm = () => {
       console.error("Sign-up error:", err);
     }
   };
-  
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 flex-col dark:bg-black dark:text-white">
-      <Link to="/">
-        <div className="flex justify-center items-center my-8">
-          <img className="h-9 cursor-pointer m-2" alt="logo" src={logoImg}></img>
-          <h1 className="text-4xl font-bold"> FreeFlow </h1>
-        </div>
-      </Link>
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md dark:bg-[rgb(30,30,30)] dark:text-white">
-        <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-50">Sign Up</h2>
-        <form className="space-y-4 dark:text-white" onSubmit={handleSignUp}>
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-50">
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="dark:text-gray-50 block text-sm font-medium text-gray-700">
-              Email Address
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
-            />
-          </div>
-          <div>
-            <label htmlFor="password" className=" dark:text-gray-50 block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
-            />
-          </div>
-          <div>
-            <label htmlFor="confirmPassword" className="dark:text-gray-50 block text-sm font-medium text-gray-700">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full px-4 py-2 text-white bg-indigo-600 rounded hover:bg-indigo-500 focus:outline-none focus:ring focus:ring-indigo-300"
-          >
-            Sign Up
-          </button>
-        </form>
-        <p className="text-sm text-center text-gray-600">
-          Already have an account?{" "}
-          <Link to="/login" className="text-indigo-500 hover:underline">
-            Login
-          </Link>
-        </p>
-      </div>
-    </div>
+    <AuthLayout
+      heading="Create your account"
+      subheading="Join FreeFlow — it only takes a moment."
+      altPrompt="Already have an account?"
+      altTo="/login"
+      altLabel="Log in"
+    >
+      <form className="space-y-5" onSubmit={handleSignUp}>
+        <Field
+          label="Full name"
+          id="name"
+          type="text"
+          autoComplete="name"
+          placeholder="Ada Lovelace"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <Field
+          label="Email address"
+          id="email"
+          type="email"
+          autoComplete="email"
+          placeholder="you@example.com"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <Field
+          label="Password"
+          id="password"
+          type="password"
+          autoComplete="new-password"
+          placeholder="Create a password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        <Field
+          label="Confirm password"
+          id="confirmPassword"
+          type="password"
+          autoComplete="new-password"
+          placeholder="Re-enter your password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          required
+        />
+
+        <SubmitButton>Create account</SubmitButton>
+      </form>
+    </AuthLayout>
   );
 };
 

@@ -34,7 +34,7 @@ const VideoContainer = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 min-[1501px]:grid-cols-4 gap-x-4 gap-y-8 px-4 pt-4 dark:bg-black dark:text-white">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 min-[1501px]:grid-cols-4 gap-x-4 gap-y-8 px-4 pt-4 dark:bg-[#07070f] dark:text-white">
       {videos
         ? videos.map((video) => (
             <Link

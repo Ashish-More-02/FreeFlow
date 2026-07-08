@@ -18,7 +18,7 @@ const ResultVideos = ({ info, channelIcon }) => {
   const uploaded = timeAgo(publishedAt);
 
   return (
-    <div className="group w-full flex flex-col sm:flex-row gap-4 rounded-xl p-2 hover:bg-gray-100 dark:hover:bg-[rgb(30,30,30)] transition-colors">
+    <div className="group w-full flex flex-col sm:flex-row gap-4 rounded-xl p-2 hover:bg-gray-100 dark:hover:bg-white/[0.04] transition-colors">
       {/* Thumbnail */}
       <div className="w-full sm:w-[360px] flex-shrink-0 overflow-hidden rounded-xl aspect-video bg-gray-200 dark:bg-[rgb(30,30,30)]">
         <img

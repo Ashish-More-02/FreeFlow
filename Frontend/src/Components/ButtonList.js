@@ -28,7 +28,7 @@ const ButtonList = () => {
   const handleClick = (name) => {
     setActive(name);
     if (name === "All") {
-      navigate("/");
+      navigate("/home");
       return;
     }
     dispatch(getSearchVideoResults(name));
@@ -36,7 +36,7 @@ const ButtonList = () => {
   };
 
   return (
-    <div className="flex items-center gap-3 w-full overflow-x-auto no-scrollbar px-4 py-3 dark:bg-black dark:text-white">
+    <div className="flex items-center gap-3 w-full overflow-x-auto no-scrollbar px-4 py-3 dark:bg-[#07070f] dark:text-white">
       {CATEGORIES.map((name) => (
         <Button
           key={name}

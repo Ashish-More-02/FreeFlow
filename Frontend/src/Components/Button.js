@@ -1,13 +1,15 @@
 import React from "react";
+import { SOFT_GRADIENT } from "../Utils/theme";
 
 const Button = ({ name, active, onClick }) => {
   return (
     <button
       onClick={onClick}
+      style={active ? { backgroundImage: SOFT_GRADIENT } : undefined}
       className={`shrink-0 whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
         active
-          ? "bg-black text-white dark:bg-white dark:text-black"
-          : "bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-[rgb(45,45,45)] dark:text-white dark:hover:bg-[rgb(65,65,65)]"
+          ? "text-[#141026] shadow-md shadow-indigo-500/20"
+          : "bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
       }`}
     >
       {name}

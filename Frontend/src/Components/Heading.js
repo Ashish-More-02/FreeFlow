@@ -133,7 +133,7 @@ const Heading = () => {
             className="h-9 w-9 p-1.5 shrink-0 cursor-pointer rounded-full hover:bg-gray-300 dark:hover:bg-[rgb(69,69,69)]"
           />
           <Link
-            to="/"
+            to="/home"
             className="flex items-center shrink-0"
             onClick={() =>
               screenSize.width < 640 ? handleCloseMenu() : handleOpenMenu()

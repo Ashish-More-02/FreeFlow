@@ -10,10 +10,23 @@ import Login from "./Components/Login";
 import SignUpForm from "./Components/SignUpForm";
 import SearchResults from "./Components/SearchResults";
 import Settings from "./Components/Settings";
+import Landing from "./Components/Landing";
+
+// Shell for the app pages (header + sidebar + routed content).
+const AppLayout = () => (
+  <div className="dark:bg-[#07070f]">
+    <Heading />
+    <Body />
+  </div>
+);
 
 // Created once at module scope so toggling the theme doesn't recreate the
 // router (which would remount every page and lose route state).
 const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <Landing />,
+  },
   {
     path: "/login",
     element: <Login />,
@@ -23,16 +36,11 @@ const appRouter = createBrowserRouter([
     element: <SignUpForm />,
   },
   {
-    path: "/",
-    element: (
-      <div className="dark:bg-black">
-        <Heading />
-        <Body />
-      </div>
-    ),
+    // Pathless layout route: wraps the app pages with the header + sidebar.
+    element: <AppLayout />,
     children: [
       {
-        path: "/",
+        path: "/home",
         element: <MainContainer />,
       },
       {
@@ -56,7 +64,7 @@ const AppContent = () => {
   const darkMode = useSelector((store) => store.appconfigslice.darkMode);
 
   return (
-    <div className={`App ${darkMode ? "dark dark:bg-black" : ""}`}>
+    <div className={`App ${darkMode ? "dark dark:bg-[#07070f]" : ""}`}>
       <RouterProvider router={appRouter} />
     </div>
   );

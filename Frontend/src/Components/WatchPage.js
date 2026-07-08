@@ -6,6 +6,7 @@ import CommentsContainer from "./CommentsContainer";
 import { DEFAULT_AVATAR, getVideoDetailsApi } from "../Utils/Constants";
 import { fetchChannelIcons } from "../Utils/youtube";
 import { formatCount, timeAgo } from "../Utils/format";
+import { SOFT_GRADIENT } from "../Utils/theme";
 
 const WatchPage = () => {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const WatchPage = () => {
   const description = snippet.description || "";
 
   return (
-    <div className="w-full px-4 py-4 dark:bg-black dark:text-white">
+    <div className="w-full px-4 py-4 dark:bg-[#07070f] dark:text-white">
       <div className="max-w-[1000px]">
         {/* Player */}
         <div className="w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-lg">
@@ -86,23 +87,26 @@ const WatchPage = () => {
                 {snippet.channelTitle || ""}
               </p>
             </div>
-            <button className="ml-2 px-4 py-2 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold text-sm hover:opacity-90">
+            <button
+              style={{ backgroundImage: SOFT_GRADIENT }}
+              className="ml-2 px-5 py-2 rounded-full text-[#141026] font-semibold text-sm shadow-md shadow-indigo-500/20 transition-transform hover:scale-[1.03]"
+            >
               Subscribe
             </button>
           </div>
 
           <div className="flex items-center gap-2 text-sm">
-            <span className="flex items-center gap-1 bg-gray-100 dark:bg-[rgb(40,40,40)] rounded-full px-4 py-2 font-medium">
+            <span className="flex items-center gap-1 bg-gray-100 dark:bg-white/5 dark:border dark:border-white/10 rounded-full px-4 py-2 font-medium">
               👍 {formatCount(statistics.likeCount)}
             </span>
-            <span className="flex items-center gap-1 bg-gray-100 dark:bg-[rgb(40,40,40)] rounded-full px-4 py-2 font-medium">
+            <span className="flex items-center gap-1 bg-gray-100 dark:bg-white/5 dark:border dark:border-white/10 rounded-full px-4 py-2 font-medium">
               ↗ Share
             </span>
           </div>
         </div>
 
         {/* Description box */}
-        <div className="mt-4 bg-gray-100 dark:bg-[rgb(30,30,30)] rounded-xl p-4 text-sm">
+        <div className="mt-4 bg-gray-100 dark:bg-white/[0.03] dark:border dark:border-white/10 rounded-xl p-4 text-sm">
           <div className="font-semibold mb-1">
             {formatCount(statistics.viewCount)} views
             {snippet.publishedAt && (

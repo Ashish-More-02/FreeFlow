@@ -39,13 +39,13 @@ const SearchResults = () => {
   };
 
   return (
-    <div className="w-full min-h-[calc(100vh-4rem)] px-4 py-6 dark:bg-black">
+    <div className="w-full min-h-[calc(100vh-4rem)] px-4 py-6 dark:bg-[#07070f]">
       <div className="max-w-4xl">
         <h1 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
           {searchQuery ? (
             <>
               Results for{" "}
-              <span className="text-indigo-600 dark:text-indigo-400">
+              <span className="text-[#6367FF] dark:text-[#8494FF]">
                 “{searchQuery}”
               </span>
             </>

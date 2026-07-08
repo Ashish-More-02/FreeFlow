@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Righteous&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,6 +15,87 @@
   }
 }
 
-*{
+* {
   @apply transition-colors duration-200;
+}
+
+body {
+  font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Righteous display face — used for the FreeFlow wordmark and hero */
+.font-display {
+  font-family: "Righteous", ui-sans-serif, system-ui, cursive;
+  letter-spacing: 0.01em;
+}
+
+/* --- FreeFlow landing motion --- */
+
+/* The "flow" signature: a slowly drifting gradient */
+@keyframes ff-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.ff-flow {
+  background-size: 300% 300%;
+  animation: ff-flow 14s ease infinite;
+}
+
+/* Floating hero cards */
+@keyframes ff-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+.ff-float {
+  animation: ff-float 6s ease-in-out infinite;
+}
+
+/* Continuous marquee row */
+@keyframes ff-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ff-marquee {
+  animation: ff-marquee 32s linear infinite;
+}
+
+/* Scroll-reveal (toggled by IntersectionObserver adding .ff-in) */
+.ff-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ff-reveal.ff-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ff-flow,
+  .ff-float,
+  .ff-marquee {
+    animation: none;
+  }
+  .ff-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

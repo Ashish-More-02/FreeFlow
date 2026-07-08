@@ -26,7 +26,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="w-full p-6 dark:bg-black dark:text-white min-h-[calc(100vh-4rem)]">
+    <div className="w-full p-6 dark:bg-[#07070f] dark:text-white min-h-[calc(100vh-4rem)]">
       <h1 className="text-3xl font-bold mb-6">Settings</h1>
 
       {/* Account section */}

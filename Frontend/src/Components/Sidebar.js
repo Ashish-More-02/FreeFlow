@@ -5,6 +5,7 @@ import {
   MdHome,
   MdWhatshot,
   MdSettings,
+  MdWaves,
   MdMusicNote,
   MdSportsEsports,
   MdMovie,
@@ -92,18 +93,23 @@ const Sidebar = () => {
         {/* Primary navigation */}
         <ul className="border-b border-gray-200 dark:border-gray-700 pb-2">
           <li>
-            <Link to="/" className={linkClass} onClick={closeOnMobile}>
+            <Link to="/home" className={linkClass} onClick={closeOnMobile}>
               <MdHome className="text-xl" /> Home
             </Link>
           </li>
           <li>
-            <Link to="/" className={linkClass} onClick={closeOnMobile}>
+            <Link to="/home" className={linkClass} onClick={closeOnMobile}>
               <MdWhatshot className="text-xl" /> Trending
             </Link>
           </li>
           <li>
             <Link to="/settings" className={linkClass} onClick={closeOnMobile}>
               <MdSettings className="text-xl" /> Settings
+            </Link>
+          </li>
+          <li>
+            <Link to="/" className={linkClass} onClick={closeOnMobile}>
+              <MdWaves className="text-xl" /> Landing page
             </Link>
           </li>
         </ul>
