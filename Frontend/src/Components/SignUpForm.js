@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logoImg from "../Images/logo.png";
+import { BACKEND_URL } from "../Utils/Constants";
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const SignUpForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
 
     // Password matching validation
@@ -27,18 +28,12 @@ const SignUpForm = () => {
       return;
     }
 
-    console.log("Sign-Up Form Submitted", formData);
-    // Add your sign-up logic here
-  };
-
-  const handleSignUp = async (e) => {
-    e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
   
     try {
-      const response = await fetch("http://localhost:3000/signup", {
+      const response = await fetch(`${BACKEND_URL}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -92,7 +87,7 @@ const SignUpForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
+              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
             />
           </div>
           <div>
@@ -106,7 +101,7 @@ const SignUpForm = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
+              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
             />
           </div>
           <div>
@@ -120,7 +115,7 @@ const SignUpForm = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               required
-              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
+              className="dark:bg-[rgb(60,60,60)] dark:border-black w-full px-3 py-2 mt-1 border rounded focus:outline-none focus:ring focus:ring-indigo-200"
             />
           </div>
           <button

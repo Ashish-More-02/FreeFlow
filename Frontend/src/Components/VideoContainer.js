@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import LodingResultVideos from "./LodingResultVideos";
 
 const VideoContainer = () => {
-  const [videos, setVideos] = useState([]);
+  // null = still loading (shows skeletons); array = loaded results.
+  const [videos, setVideos] = useState(null);
   const tempArray = [1, 2, 3, 4, 5, 6];
 
   useEffect(() => {
@@ -13,10 +14,14 @@ const VideoContainer = () => {
   }, []);
 
   const getVideos = async () => {
-    const data = await fetch(YOUTUBE_VIDEO_API);
-    const jsonData = await data.json();
-    setVideos(jsonData.items);
-    // console.log(jsonData);
+    try {
+      const data = await fetch(YOUTUBE_VIDEO_API);
+      const jsonData = await data.json();
+      setVideos(Array.isArray(jsonData.items) ? jsonData.items : []);
+    } catch (error) {
+      console.error("Error fetching videos:", error);
+      setVideos([]);
+    }
   };
 
   return (
@@ -35,7 +40,10 @@ const VideoContainer = () => {
           })
         : tempArray.map((i) => {
             return (
-              <div className="w-full sm:w-1/2 md:w-1/3 lg:w-[30%] cursor-pointer p-2 mx-0 sm:mx-2 my-2 h-auto">
+              <div
+                key={i}
+                className="w-full sm:w-1/2 md:w-1/3 lg:w-[30%] cursor-pointer p-2 mx-0 sm:mx-2 my-2 h-auto"
+              >
                 <LodingResultVideos></LodingResultVideos>
               </div>
             );

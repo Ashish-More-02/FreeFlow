@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link ,useNavigate} from "react-router-dom";
 import logoImg from "../Images/logo.png";
-import { useSelector } from "react-redux";
 import { setUser } from "../Redux/Slices/UserSlice";
 import { useDispatch } from "react-redux";
+import { BACKEND_URL } from "../Utils/Constants";
 
 
 const Login = () => {
@@ -26,19 +26,13 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted", formData);
-    // Add your login logic here
-  };
-
   const handleLogin = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
 
     try {
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch(`${BACKEND_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

@@ -13,7 +13,7 @@ import SearchResults from "./Components/SearchResults";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [darkmode, setDarkmode] = useState(false);
+  const [darkmode, setDarkmode] = useState(true);
 
   const appRouter = createBrowserRouter([
     {

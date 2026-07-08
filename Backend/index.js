@@ -14,9 +14,13 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const allowedOrigins = process.env.FRONTEND_URL
+  ? [process.env.FRONTEND_URL, "http://localhost:3001"]
+  : ["http://localhost:3001"];
+
 app.use(
   cors({
-    origin: "http://localhost:3001",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
@@ -68,7 +72,21 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
+app.get("/api/search-suggestions", async (req, res) => {
+  const { q } = req.query;
+  if (!q) return res.json([]);
+  try {
+    const response = await fetch(
+      `https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${encodeURIComponent(q)}`
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch suggestions" });
+  }
+});
+
+app.get("/", (req, res) => {``
   res.send("Hello World");
 });
 

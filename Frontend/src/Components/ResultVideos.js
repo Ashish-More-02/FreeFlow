@@ -1,13 +1,9 @@
-import { useState } from "react";
-
 const ResultVideos = ({ info }) => {
-  // const [overflow, setOverflow] = useState();
-
   if (!info) {
     return <div>Loading...</div>;
   }
 
-  const { snippet = {}, statistics = {} } = info;
+  const { snippet = {} } = info;
   const {
     channelTitle,
     title,
@@ -15,19 +11,6 @@ const ResultVideos = ({ info }) => {
     publishedAt = "",
     description = "",
   } = snippet;
-
-  function formatViews(views) {
-    if (views == null) return "No";
-    const n = Number(views);
-    if (Number.isNaN(n)) return "No";
-    if (n >= 1_000_000) {
-      return (n / 1_000_000).toFixed(1) + "M";
-    } else if (n >= 1_000) {
-      return (n / 1_000).toFixed(1) + "K";
-    } else {
-      return n.toString();
-    }
-  }
 
   function calculate_time_uploaded(publishedAt) {
     const now = new Date();
@@ -60,13 +43,9 @@ const ResultVideos = ({ info }) => {
     }
   }
 
-  const viewsArray = ["1.2 M","1.22 k","213 k"]
-
   const OrigianlViews = "no views";
 
   const dateUploaded = calculate_time_uploaded(publishedAt) || "no time";
-
-  const handleClickVideo = () => {};
 
   return (
     <div className="w-full bg-gray-200 p-4 rounded-xl flex flex-col md:flex-row dark:bg-[rgb(30,30,30)] dark:text-white">

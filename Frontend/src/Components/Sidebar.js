@@ -1,12 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { doToggleMenu } from "../Redux/Slices/appConfigSlice";
 
 const Sidebar = () => {
-  const isMenuOpen = useSelector((store) => store.toggleMenu);
-  const dispatch = useDispatch();
-
   return (
     <div className="relative z-10 bg-white dark:text-white">
       {/* Sidebar content */}

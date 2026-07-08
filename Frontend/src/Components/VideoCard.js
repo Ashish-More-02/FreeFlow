@@ -1,8 +1,4 @@
-import { useState } from "react";
-
 const VideoCard = ({ info }) => {
-  // const [overflow, setOverflow] = useState();
-
   if (!info) {
     return <div>Loading...</div>;
   }
@@ -57,8 +53,6 @@ const VideoCard = ({ info }) => {
   const OrigianlViews = formatViews(statistics.viewCount) || "no views";
 
   const dateUploaded = calculate_time_uploaded(publishedAt) || "no time";
-
-  const handleClickVideo = () => {};
 
   return (
     <div className="w-full h-full bg-gray-200 p-4 rounded-xl  dark:bg-[rgb(30,30,30)] dark:text-white">

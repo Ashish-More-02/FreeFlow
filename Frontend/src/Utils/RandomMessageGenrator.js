@@ -102,6 +102,8 @@ const chatMessages = [
 ];
 
 export const RandomMessageGenerator = () => {
-  let randomNum = Math.round(Math.random() * chatMessages.length);
+  // Math.floor keeps the index in range; Math.round could return
+  // chatMessages.length and yield an undefined (blank) message.
+  let randomNum = Math.floor(Math.random() * chatMessages.length);
   return chatMessages[randomNum];
 };

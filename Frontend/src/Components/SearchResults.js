@@ -6,19 +6,28 @@ import { useSelector } from "react-redux";
 import LodingResultVideos from "./LodingResultVideos";
 
 const SearchResults = () => {
-  const [videos, setVideos] = useState([]);
+  // null = still loading (shows skeletons); array = loaded results.
+  const [videos, setVideos] = useState(null);
   const searchQuery = useSelector((store) => store.search.searchQuery);
   const tempArray = [1, 2, 3, 4, 5, 6];
 
   useEffect(() => {
     getVideos();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
 
   const getVideos = async () => {
-    const data = await fetch(YOUTUBE_SEARCH_RESULTS_API + searchQuery);
-    const jsonData = await data.json();
-    setVideos(jsonData.items);
-    console.log(jsonData);
+    try {
+      const data = await fetch(YOUTUBE_SEARCH_RESULTS_API + searchQuery);
+      const jsonData = await data.json();
+      // The search API mixes videos, channels and playlists; keep only
+      // items that actually have a videoId so the /watch links are valid.
+      const items = Array.isArray(jsonData.items) ? jsonData.items : [];
+      setVideos(items.filter((item) => item?.id?.videoId));
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      setVideos([]);
+    }
   };
 
   return (
@@ -38,7 +47,10 @@ const SearchResults = () => {
           })
         : tempArray.map((i) => {
             return (
-              <div className="w-full sm:w-1/2 md:w-1/3 lg:w-[30%] cursor-pointer p-2 mx-0 sm:mx-2 my-2 h-auto">
+              <div
+                key={i}
+                className="w-full sm:w-1/2 md:w-1/3 lg:w-[30%] cursor-pointer p-2 mx-0 sm:mx-2 my-2 h-auto"
+              >
                 <LodingResultVideos></LodingResultVideos>
               </div>
             );

@@ -12,18 +12,23 @@ const CommentsContainer = () => {
 
   useEffect(() => {
     getComments();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoId]);
 
   const getComments = async () => {
-    const data = await fetch(
-      YOUTUBE_COMMENTS_API +
-        videoId +
-        "&key=AIzaSyCnIGheBghd1RUSMtEb7KrflcrpUCoyNYA"
-    );
-    const jsonData = await data.json();
-    setTOPComments(jsonData.items);
-
-    // console.log(jsonData.items)
+    try {
+      const data = await fetch(
+        YOUTUBE_COMMENTS_API +
+          videoId +
+          "&key=AIzaSyCnIGheBghd1RUSMtEb7KrflcrpUCoyNYA"
+      );
+      const jsonData = await data.json();
+      // API can return an error object (e.g. comments disabled) with no items.
+      setTOPComments(Array.isArray(jsonData.items) ? jsonData.items : []);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+      setTOPComments([]);
+    }
   };
   return (
     <div className="my-4 bg-gray-200 p-4 w-full md:max-w-[66%] dark:bg-black dark:text-white">

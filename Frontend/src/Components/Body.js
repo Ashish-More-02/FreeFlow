@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Sidebar from "./Sidebar";
-import MainContainer from "./MainContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import useScreenSize from "../Utils/useScreenSize";
@@ -11,19 +10,13 @@ const Body = ({ isMenuOpen, setIsMenuOpen }) => {
   const dispatch = useDispatch();
   const screenSize = useScreenSize();
 
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth();
-
-
-  useEffect(()=>{
-    if(screenSize.width<640){
+  useEffect(() => {
+    if (screenSize.width < 640) {
       dispatch(closeMenu());
-    }
-    else{
+    } else {
       dispatch(openMenu());
     }
-  },[screenSize.width])
+  }, [screenSize.width, dispatch]);
 
   return (
     <div className="flex w-full">

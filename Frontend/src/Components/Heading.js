@@ -7,18 +7,20 @@ import {
 } from "../Redux/Slices/appConfigSlice";
 import logoImg from "../Images/logo.png";
 import { YOUTUBE_SEARCH_API } from "../Utils/Constants";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { setUser } from "../Redux/Slices/UserSlice";
 import useScreenSize from "../Utils/useScreenSize";
 import { getSearchVideoResults } from "../Redux/Slices/SearchSlice";
 
 const Heading = ({ darkmode, setDarkmode }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  // index of the suggestion highlighted via arrow keys (-1 = none)
+  const [activeIndex, setActiveIndex] = useState(-1);
   const screenSize = useScreenSize();
 
   const handleToggleMenu = () => {
@@ -34,6 +36,9 @@ const Heading = ({ darkmode, setDarkmode }) => {
   };
 
   useEffect(() => {
+    // any new keystroke resets the arrow-key highlight
+    setActiveIndex(-1);
+
     if (!searchQuery.trim()) {
       setSuggestions([]);
       return;
@@ -46,22 +51,72 @@ const Heading = ({ darkmode, setDarkmode }) => {
     return () => {
       clearTimeout(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   const getSearchSuggestions = async () => {
     try {
       const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
       const jsonData = await data.json();
-      setSuggestions(jsonData[1]);
+      // Google suggest returns [query, [suggestions], ...]; on error the
+      // backend returns an object, so guard against a missing array.
+      setSuggestions(Array.isArray(jsonData?.[1]) ? jsonData[1] : []);
     } catch (error) {
       console.error("Error fetching search suggestions:", error);
       setSuggestions([]);
     }
   };
 
-  const showResultVideos = () => {
-    dispatch(getSearchVideoResults(searchQuery));
+  // Runs the actual search: updates the box, stores the query in redux,
+  // navigates to the results page and closes the suggestion dropdown.
+  const runSearch = (queryArg) => {
+    const finalQuery = (queryArg ?? searchQuery).trim();
+    if (!finalQuery) return;
+
+    setSearchQuery(finalQuery);
+    dispatch(getSearchVideoResults(finalQuery));
+    setShowSuggestions(false);
+    setActiveIndex(-1);
+    navigate("/results");
   };
+
+  const handleKeyDown = (e) => {
+    const hasSuggestions = showSuggestions && suggestions.length > 0;
+
+    if (e.key === "ArrowDown" && hasSuggestions) {
+      e.preventDefault();
+      // last suggestion -> text box (-1) -> first suggestion
+      setActiveIndex((prev) =>
+        prev >= suggestions.length - 1 ? -1 : prev + 1
+      );
+    } else if (e.key === "ArrowUp" && hasSuggestions) {
+      e.preventDefault();
+      // text box (-1) -> last suggestion; first suggestion (0) -> text box (-1)
+      setActiveIndex((prev) =>
+        prev <= -1 ? suggestions.length - 1 : prev - 1
+      );
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      // if a suggestion is highlighted, search for it; otherwise use the typed text
+      const chosen =
+        hasSuggestions && activeIndex >= 0
+          ? suggestions[activeIndex]
+          : searchQuery;
+      runSearch(chosen);
+    } else if (e.key === "Escape") {
+      setShowSuggestions(false);
+      setActiveIndex(-1);
+    }
+  };
+
+  // What the input actually displays: the highlighted suggestion while the user
+  // arrows through the list, otherwise the text they originally typed. Note that
+  // `searchQuery` (the typed text) is never overwritten during navigation, so
+  // moving back to the text box restores it.
+  const inputValue =
+    activeIndex >= 0 && suggestions[activeIndex] != null
+      ? suggestions[activeIndex]
+      : searchQuery;
 
   return (
     <div className="shadow-lg p-3 my-0 rounded-md w-full bg-gray-200 sticky z-10 top-0 sm:static sm:z-0 dark:bg-[rgb(30,30,30)] dark:text-white dark:my-0">
@@ -109,10 +164,18 @@ const Heading = ({ darkmode, setDarkmode }) => {
               className="w-full bg-gray-100 rounded-full py-2 md:py-3 px-5 pr-14 text-base md:text-lg dark:bg-[rgb(50,50,50)] dark:text-inherit"
               type="text"
               placeholder="Search"
-              value={searchQuery}
+              value={inputValue}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
               onFocus={() => setShowSuggestions(true)}
-              onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+              onBlur={() =>
+                // delay so a suggestion click (onMouseDown) is handled first;
+                // resetting activeIndex restores the user's typed text
+                setTimeout(() => {
+                  setShowSuggestions(false);
+                  setActiveIndex(-1);
+                }, 200)
+              }
             />
             <div className="absolute right-0 top-0 h-full flex items-center">
               {searchQuery && (
@@ -123,24 +186,30 @@ const Heading = ({ darkmode, setDarkmode }) => {
                   <span className="text-base md:text-lg text-gray-500">✕</span>
                 </button>
               )}
-              <Link to={"/results"}>
-                <button
-                  className="p-2 md:p-3 hover:bg-gray-200 rounded-full mr-1 dark:hover:bg-[rgb(80,80,80)]"
-                  onClick={showResultVideos}
-                >
-                  <span className="text-base md:text-lg">🔍</span>
-                </button>
-              </Link>
+              <button
+                type="button"
+                className="p-2 md:p-3 hover:bg-gray-200 rounded-full mr-1 dark:hover:bg-[rgb(80,80,80)]"
+                onClick={() => runSearch(inputValue)}
+              >
+                <span className="text-base md:text-lg">🔍</span>
+              </button>
             </div>
 
             {showSuggestions && searchQuery && (
               <div className="absolute mt-1 w-[200%] mx-auto left-[-85px] sm:w-full sm:left-0 bg-white rounded-lg shadow-lg z-50 dark:bg-[rgb(30,30,30)] dark:text-white">
                 <ul className="py-2">
-                  {suggestions.map((s) => (
+                  {suggestions.map((s, index) => (
                     <li
                       key={s}
-                      className="px-5 py-2.5 hover:bg-gray-100 cursor-pointer text-base md:text-lg flex items-center gap-3 dark:hover:bg-[rgb(80,80,80)]"
-                      onClick={() => setSearchQuery(s)}
+                      className={`px-5 py-2.5 cursor-pointer text-base md:text-lg flex items-center gap-3 ${
+                        index === activeIndex
+                          ? "bg-gray-100 dark:bg-[rgb(80,80,80)]"
+                          : "hover:bg-gray-100 dark:hover:bg-[rgb(80,80,80)]"
+                      }`}
+                      onMouseEnter={() => setActiveIndex(index)}
+                      // onMouseDown fires before the input's onBlur, so the
+                      // dropdown is still mounted when the click is handled
+                      onMouseDown={() => runSearch(s)}
                     >
                       <span className="text-gray-400 text-lg md:text-xl">
                         🔍
