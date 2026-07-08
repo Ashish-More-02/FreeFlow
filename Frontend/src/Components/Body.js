@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import useScreenSize from "../Utils/useScreenSize";
 import { closeMenu, openMenu } from "../Redux/Slices/appConfigSlice";
 
-const Body = ({ isMenuOpen, setIsMenuOpen }) => {
+const Body = () => {
   const togglemenu = useSelector((store) => store.appconfigslice.toggleMenu);
   const dispatch = useDispatch();
   const screenSize = useScreenSize();

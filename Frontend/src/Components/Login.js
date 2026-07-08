@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link ,useNavigate} from "react-router-dom";
 import logoImg from "../Images/logo.png";
 import { setUser } from "../Redux/Slices/UserSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BACKEND_URL } from "../Utils/Constants";
 
 
 const Login = () => {
 
   const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((store) => store.user);
 
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [formData, setFormData] = useState({
@@ -17,6 +18,11 @@ const Login = () => {
     rememberMe: false,
   });
   const navigate = useNavigate();
+
+  // Already logged in? Don't show the login form, go home.
+  useEffect(() => {
+    if (isAuthenticated) navigate("/");
+  }, [isAuthenticated, navigate]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -40,8 +46,6 @@ const Login = () => {
 
       const data = await response.json();
       if (response.ok) {
-        alert("Login successful");
-        console.log("Logged in user:", data.user);
         setLoginSuccess(true);
         dispatch(setUser(data.user));
         navigate("/");

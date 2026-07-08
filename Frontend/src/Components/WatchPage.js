@@ -29,7 +29,7 @@ const WatchPage = () => {
           muted
         ></iframe>
         <div className="w-[34%] pr-5 hidden md:block">
-          <LiveChat></LiveChat>
+          {/* <LiveChat></LiveChat> */}
         </div>
       </div>
 

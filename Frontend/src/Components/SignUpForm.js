@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoImg from "../Images/logo.png";
 import { BACKEND_URL } from "../Utils/Constants";
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -41,7 +42,8 @@ const SignUpForm = () => {
   
       const data = await response.json();
       if (response.ok) {
-        alert("User registered successfully");
+        alert("User registered successfully. Please log in.");
+        navigate("/login");
       } else {
         alert(data.error);
       }

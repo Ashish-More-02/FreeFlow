@@ -16,3 +16,8 @@ export const YOUTUBE_COMMENTS_API =
 export const YOUTUBE_SEARCH_RESULTS_API =
   "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&key=" +
   GOOGLE_API_KEY+"&q=";
+
+// Real YouTube video categories (only needs the API key, no OAuth).
+export const YOUTUBE_CATEGORIES_API =
+  "https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=US&key=" +
+  GOOGLE_API_KEY;

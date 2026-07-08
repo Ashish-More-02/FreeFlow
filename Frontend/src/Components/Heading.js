@@ -4,6 +4,7 @@ import {
   closeMenu,
   doToggleMenu,
   openMenu,
+  toggleDarkMode,
 } from "../Redux/Slices/appConfigSlice";
 import logoImg from "../Images/logo.png";
 import { YOUTUBE_SEARCH_API } from "../Utils/Constants";
@@ -11,11 +12,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useScreenSize from "../Utils/useScreenSize";
 import { getSearchVideoResults } from "../Redux/Slices/SearchSlice";
+import { IoMenu } from "react-icons/io5";
+import { IoSearch } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
 
-const Heading = ({ darkmode, setDarkmode }) => {
+const Heading = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, isAuthenticated } = useSelector((state) => state.user);
+  const darkmode = useSelector((state) => state.appconfigslice.darkMode);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -120,46 +125,34 @@ const Heading = ({ darkmode, setDarkmode }) => {
 
   return (
     <div className="shadow-lg p-3 my-0 rounded-md w-full bg-gray-200 sticky z-10 top-0 sm:static sm:z-0 dark:bg-[rgb(30,30,30)] dark:text-white dark:my-0">
-      <div className="grid grid-cols-12 items-center gap-3">
-        <div className="col-span-2 md:col-span-3 lg:col-span-2 flex items-center gap-3">
-          {/* hamburger icon */}
-          <img
+      <div className="flex items-center gap-2 sm:gap-4 w-full">
+        {/* Left: menu button + logo (fixed width, never shrinks) */}
+        <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+          <IoMenu
             onClick={handleToggleMenu}
-            className="h-6 w-6 md:h-7 md:w-7 cursor-pointer hover:bg-gray-100 p-1 rounded-full dark:invert dark:hover:bg-[rgb(200,200,200)]"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/800px-Hamburger_icon.svg.png"
-            alt="menu"
+            className="h-9 w-9 p-1.5 shrink-0 cursor-pointer rounded-full hover:bg-gray-300 dark:hover:bg-[rgb(69,69,69)]"
           />
-          {screenSize.width < 640 ? (
-            <Link
-              to="/"
-              className="flex items-center"
-              onClick={handleCloseMenu}
-            >
-              <img
-                className="h-8 md:h-9 lg:h-10 cursor-pointer"
-                src={logoImg}
-                alt="logo"
-              />
-              <h1 className="hidden md:block text-2xl lg:text-3xl font-bold ml-2 cursor-pointer">
-                FreeFlow
-              </h1>
-            </Link>
-          ) : (
-            <Link to="/" className="flex items-center" onClick={handleOpenMenu}>
-              <img
-                className="h-8 md:h-9 lg:h-10 cursor-pointer"
-                src={logoImg}
-                alt="logo"
-              />
-              <h1 className="hidden md:block text-2xl lg:text-3xl font-bold ml-2 cursor-pointer">
-                FreeFlow
-              </h1>
-            </Link>
-          )}
+          <Link
+            to="/"
+            className="flex items-center shrink-0"
+            onClick={() =>
+              screenSize.width < 640 ? handleCloseMenu() : handleOpenMenu()
+            }
+          >
+            <img
+              className="h-8 md:h-9 lg:h-10 w-auto shrink-0 cursor-pointer"
+              src={logoImg}
+              alt="logo"
+            />
+            <h1 className="hidden md:block text-2xl lg:text-3xl font-bold ml-2 cursor-pointer">
+              FreeFlow
+            </h1>
+          </Link>
         </div>
 
-        <div className="col-span-7 md:col-span-5 lg:col-span-8 dark:bg-inherit dark:text-white">
-          <div className="relative sm:max-w-2xl mx-auto">
+        {/* Middle: search bar fills the remaining space */}
+        <div className="flex-1 min-w-0 dark:bg-inherit dark:text-white">
+          <div className="relative max-w-2xl mx-auto">
             <input
               className="w-full bg-gray-100 rounded-full py-2 md:py-3 px-5 pr-14 text-base md:text-lg dark:bg-[rgb(50,50,50)] dark:text-inherit"
               type="text"
@@ -183,7 +176,7 @@ const Heading = ({ darkmode, setDarkmode }) => {
                   onClick={() => setSearchQuery("")}
                   className="p-2 md:p-3 hover:bg-gray-200 rounded-full dark:hover:bg-[rgb(80,80,80)]"
                 >
-                  <span className="text-base md:text-lg text-gray-500">✕</span>
+                  <IoClose className="sm:text-xl"/>
                 </button>
               )}
               <button
@@ -191,12 +184,12 @@ const Heading = ({ darkmode, setDarkmode }) => {
                 className="p-2 md:p-3 hover:bg-gray-200 rounded-full mr-1 dark:hover:bg-[rgb(80,80,80)]"
                 onClick={() => runSearch(inputValue)}
               >
-                <span className="text-base md:text-lg">🔍</span>
+                <IoSearch className="sm:text-lg"/>
               </button>
             </div>
 
             {showSuggestions && searchQuery && (
-              <div className="absolute mt-1 w-[200%] mx-auto left-[-85px] sm:w-full sm:left-0 bg-white rounded-lg shadow-lg z-50 dark:bg-[rgb(30,30,30)] dark:text-white">
+              <div className="absolute mt-1 w-full left-0 bg-white rounded-lg shadow-lg z-50 dark:bg-[rgb(30,30,30)] dark:text-white">
                 <ul className="py-2">
                   {suggestions.map((s, index) => (
                     <li
@@ -211,9 +204,7 @@ const Heading = ({ darkmode, setDarkmode }) => {
                       // dropdown is still mounted when the click is handled
                       onMouseDown={() => runSearch(s)}
                     >
-                      <span className="text-gray-400 text-lg md:text-xl">
-                        🔍
-                      </span>
+                      <IoSearch />
                       <span>{s}</span>
                     </li>
                   ))}
@@ -223,12 +214,10 @@ const Heading = ({ darkmode, setDarkmode }) => {
           </div>
         </div>
 
-        <div className="col-span-1 md:col-span-1 lg:col-span-1 flex items-center justify-center">
+        {/* Right: theme toggle + account (fixed width, never shrinks) */}
+        <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
           <button
-            onClick={() => {
-              setDarkmode(!darkmode);
-              console.log(darkmode);
-            }}
+            onClick={() => dispatch(toggleDarkMode())}
             className="p-2 rounded-full hover:bg-gray-300 dark:hover:bg-[rgb(80,80,80)] transition-colors"
             aria-label="Toggle dark mode"
           >
@@ -264,23 +253,22 @@ const Heading = ({ darkmode, setDarkmode }) => {
               </svg>
             )}
           </button>
-        </div>
-
-        <div className="col-span-2 md:col-span-1 lg:col-span-1 flex justify-end">
-          <Link to="/login" className="flex items-center gap-3">
+          <Link
+            to={isAuthenticated ? "/settings" : "/login"}
+            className="flex items-center gap-2 sm:gap-3"
+          >
             <img
               className="h-8 w-8 md:h-10 md:w-10 rounded-full"
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtRs_rWILOMx5-v3aXwJu7LWUhnPceiKvvDg&s"
               alt="User"
             />
-            {isAuthenticated ? (
+            {isAuthenticated && user ? (
               <span className="hidden md:block text-lg whitespace-nowrap ">
                 {user.name}
               </span>
             ) : (
               <span className="hidden md:block text-lg lg:text-xl">Login</span>
             )}
-            {/* <span className="hidden md:block text-lg lg:text-xl">Login</span> */}
           </Link>
         </div>
       </div>
