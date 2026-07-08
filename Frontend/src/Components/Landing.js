@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import logoImg from "../Images/logo.png";
-import homepageShot from "../assets/freeflow-homepage.png";
+import homepageShot from "../assets/freeflow-homepage.webp";
 import {
   MdPlayArrow,
   MdSearch,
